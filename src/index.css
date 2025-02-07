@@ -39,11 +39,6 @@ h1 {
   line-height: 1.1;
 }
 
-h1.chart-title {
-  font-size: 1.75em;
-  line-height: 1.1;
-}
-
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -143,3 +138,20 @@ button:focus-visible {
   }
 }
 
+h1.chart-title {
+  font-size: 1.75em;
+  line-height: 1.1;
+}
+.visualization-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.visualization-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: left; 
+  gap: 10px; /* Optional: Adds space between the visualization components */
+  margin-bottom: 20px;
+}

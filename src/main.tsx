@@ -6,7 +6,14 @@ import PercentFCOS from './PercentFCOS.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App /><br /><br />
-    <PercentFCOS />
+    <div className="visualization-row">
+      <App />
+      <App />
+      <App />
+    </div>
+    <div className="visualization-row">
+      <PercentFCOS />
+      <PercentFCOS />
+    </div>
   </StrictMode>,
 )

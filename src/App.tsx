@@ -25,9 +25,9 @@ const chartConfig = {
 
 export default function App() {
   return (
-  <>
+  <div>
     <h1 className="chart-title">Sample Bar Chart</h1>
-    <div className="this-chart">
+    <div className="live-data-bar-chart">
       <ChartContainer config={chartConfig} className="min-h-[200px] w-fit">
         <BarChart width={300} height={200} accessibilityLayer data={chartData}>
           <CartesianGrid vertical={false} />
@@ -46,7 +46,7 @@ export default function App() {
         </BarChart>
       </ChartContainer>
     </div>
-  </>
+  </div>
 )
 }
 

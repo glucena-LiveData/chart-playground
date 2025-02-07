@@ -92,7 +92,7 @@ const chartConfig = {
 
 export default function PercentFCOS() {
   return (
-  <>
+  <div className="visualization-container">
     <h1 className="chart-title">% of FCOS (&lt; 0 Minutes Delay)</h1>
     <div className="live-data-line-graph" >
       <ChartContainer config={chartConfig} className="min-h-[350px] w-full">
@@ -117,7 +117,7 @@ export default function PercentFCOS() {
         </LineChart>
       </ChartContainer>
     </div>
-  </>
+  </div>
 )
 }
 
