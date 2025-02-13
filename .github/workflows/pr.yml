@@ -26,6 +26,9 @@ jobs:
       - name: Install dependencies
         run: bun install
 
+      - name: Run typescript
+        run: bun run typescript
+
       - name: Run lint
         run: bun run lint
 

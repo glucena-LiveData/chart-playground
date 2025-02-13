@@ -3,7 +3,6 @@
 import { ColumnDef } from "@tanstack/react-table"
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts"
 
-import { addSortButton } from "@/lib/functional-utils.tsx"
 import {
   ChartConfig,
   ChartContainer,
@@ -11,6 +10,8 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 import { DataTable } from "@/components/ui/data-table"
+
+import { Button } from "../ui/button"
 
 interface FirstCaseSummary {
   scheduled_service: string
@@ -28,25 +29,40 @@ const chartConfig = {
 const columns: ColumnDef<FirstCaseSummary>[] = [
   {
     accessorKey: "scheduled_service",
-    header: ({ column }) => {
-      return addSortButton(column, "Service")
-    },
+    header: ({ column }) => (
+      <Button
+        className="bg-transparent"
+        variant="invisible"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        Service
+        {/* <ArrowUpDown className="ml-2 h-4 w-4" /> */}
+      </Button>
+    ),
     cell: (info) => {
       return info.getValue()
     },
   },
   {
     accessorKey: "FC Count",
-    header: ({ column }) => {
-      return addSortButton(column, "First Case Count")
-    },
+    header: ({ column }) => (
+      <Button
+        className="bg-transparent"
+        variant="invisible"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+      >
+        "First Case Count"
+        {/* <ArrowUpDown className="ml-2 h-4 w-4" /> */}
+      </Button>
+    ),
   },
   {
     accessorKey: "Pct FCOS",
     header: "Actual Hours / Case",
-    type: "barChartColumn",
-    maxBar: 100,
-    cell: (info: { getValue: () => number | string }) => {
+    cell: (info) => {
+      // type: "barChartColumn",
+      // maxBar: 100,
+      // cell: (info: { getValue: () => number | string }) => {
       const value = info.getValue()
       return typeof value === "number" ? `${Math.round(value)}%` : value
     },
@@ -180,7 +196,7 @@ export function ServiceWeekdayFirstCaseStatsChart() {
                 offset={8}
                 className="fill-foreground font-bold"
                 fontSize={12}
-                formatter={(value) => `${Math.round(value)}%`}
+                formatter={(value: number) => `${Math.round(value)}%`}
               />
             </Bar>
           </BarChart>

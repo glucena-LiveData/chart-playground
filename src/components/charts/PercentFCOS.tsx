@@ -1,9 +1,3 @@
-"use client"
-
-import { LineChartConfig } from "@/types/chart-config"
-import { getShortMonth } from "@/lib/enumerations"
-import { numericFormat } from "@/lib/formatting-utils"
-
 import { AreaGraph } from "../ui/area-graph"
 
 const chartData = [
@@ -73,17 +67,16 @@ const chartConfig = {
   x_axis: {
     label: "Month of Room In",
     dataKey: "case_month",
-    formatter: (value: number) => getShortMonth(value),
+    formatter: (value: number) => value, //format with date-fns,
   },
   y_axis: {
     label: "% of First Case On-Time Starts",
     dataKey: "Pct FCOS",
-    formatter: (value: number) =>
-      `% of First Case On-Time Starts: ${numericFormat(value, 1)}%`,
-    tickFormatter: (value: number) => `${numericFormat(value, 0)}%`,
+    formatter: (value: number) => `% of First Case On-Time Starts: ${value}%`,
+    tickFormatter: (value: number) => `${value}%`,
     color: "#0096DD",
   },
-} satisfies LineChartConfig
+}
 
 export default function PercentFCOS() {
   return (

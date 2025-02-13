@@ -88,9 +88,13 @@ const columns: ColumnDef<FirstCaseDelayReasons>[] = [
   {
     accessorKey: "Median Actual Minutes Case",
     header: "Median Minutes Delayed By",
-    type: "barChartColumn",
-    maxBar: Math.max(...visualizationData.map((d) => d["PctFCOS"])),
-    cell: (info: { getValue: () => number | string }) => {
+    // type: "barChartColumn",
+    // maxBar: Math.max(...visualizationData.map((d) => d["PctFCOS"])),
+    // cell: (info: { getValue: () => number | string }) => {
+    //   const value = info.getValue()
+    //   return typeof value === "number" ? Math.round(value) : value
+    // },
+    cell: (info) => {
       const value = info.getValue()
       return typeof value === "number" ? Math.round(value) : value
     },

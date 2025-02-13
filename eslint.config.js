@@ -24,6 +24,7 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
       "no-mixed-spaces-and-tabs": "off",
+      "react-refresh/only-export-components": "off",
     },
   }
 )

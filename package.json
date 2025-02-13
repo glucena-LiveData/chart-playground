@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "typescript": "tsc -p .",
     "prettier:fix": "prettier --write .",
     "prettier:check": "prettier --check .",
     "preview": "vite preview"
@@ -29,6 +30,7 @@
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
     "@vitejs/plugin-react": "4.3.4",
+    "typescript-eslint": "8.24.0",
     "autoprefixer": "10.4.20",
     "@eslint/js": "^9.19.0",
     "eslint": "^9.19.0",

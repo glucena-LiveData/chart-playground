@@ -98,9 +98,10 @@ const columns: ColumnDef<FirstCaseSummary>[] = [
   {
     accessorKey: "Pct FCOS",
     header: "% First Caes On Time",
-    type: "barChartColumn",
-    maxBar: 100,
-    cell: (info: { getValue: () => number | string }) => {
+    cell: (info) => {
+      //   type: "barChartColumn",
+      // maxBar: 100,
+      // cell: (info: { getValue: () => number | string }) => {
       const value = info.getValue()
       return typeof value === "number" ? `${Math.round(value)}%` : value
     },
