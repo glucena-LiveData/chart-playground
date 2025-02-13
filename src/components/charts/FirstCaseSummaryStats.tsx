@@ -2,7 +2,6 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 
-import { numericFormat } from "@/lib/formatting-utils"
 import { DataTable } from "@/components/ui/data-table"
 
 type FirstCaseSummary = {
@@ -20,7 +19,7 @@ const columns: ColumnDef<FirstCaseSummary>[] = [
   {
     accessorKey: "1st Cases",
     header: "1st Cases",
-    cell: (info) => numericFormat(info.getValue(), 0),
+    cell: (info) => `${info.getValue()}%`,
   },
   {
     accessorKey: "Late Starts",
@@ -29,32 +28,32 @@ const columns: ColumnDef<FirstCaseSummary>[] = [
   {
     accessorKey: "% of First Cases On-Time",
     header: "% of First Cases On-Time",
-    cell: (info) => `${numericFormat(info.getValue(), 1)}%`,
+    cell: (info) => `${info.getValue()}%`,
   },
   {
     accessorKey: "% Late Start",
     header: "% Late Start",
-    cell: (info) => `${numericFormat(info.getValue(), 1)}%`,
+    cell: (info) => `${info.getValue()}%`,
   },
   {
     accessorKey: "Pct FC Delayed < 15",
     header: "<15min Late",
-    cell: (info) => `${numericFormat(info.getValue(), 1)}%`,
+    cell: (info) => `${info.getValue()}%`,
   },
   {
     accessorKey: "Pct FC Delayed 15-30",
     header: "<15-30min Late",
-    cell: (info) => `${numericFormat(info.getValue(), 1)}%`,
+    cell: (info) => `${info.getValue()}%`,
   },
   {
     accessorKey: "Pct FC Delayed > 30",
     header: ">30min Late",
-    cell: (info) => `${numericFormat(info.getValue(), 1)}%`,
+    cell: (info) => `${info.getValue()}%`,
   },
   {
     accessorKey: "Total Hours Lost",
     header: "Total Hrs Lost",
-    cell: (info) => numericFormat(info.getValue(), 1),
+    cell: (info) => `${info.getValue()}%`,
   },
 ]
 

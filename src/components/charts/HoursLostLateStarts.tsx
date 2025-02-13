@@ -1,9 +1,6 @@
 "use client"
 
-import { LineChartConfig } from "@/types/chart-config"
-import { getShortMonth } from "@/lib/enumerations"
-
-import { AreaGraph } from "../ui/area-graph"
+import { AreaGraph, ChartConfig } from "../ui/area-graph"
 
 const chartData = [
   {
@@ -92,20 +89,20 @@ const chartData = [
   },
 ]
 
-const chartConfig = {
+const chartConfig: ChartConfig = {
   x_axis: {
     label: "Month of Room In",
-    data_key: "case_month",
-    formatter: (value: number) => getShortMonth(value),
+    dataKey: "case_month",
+    formatter: (value: string) => value, //getShortMonth(value),
   },
   y_axis: {
     label: "Hours Lost to First Case Late Starts",
-    formatter: (value: number) =>
+    formatter: (value: string) =>
       `Hours Lost to First Case Late Starts: ${value}`,
     dataKey: "Total Hours Lost",
     color: "#00AC72",
   },
-} satisfies LineChartConfig
+}
 
 export default function HoursLostLateStarts() {
   return (
@@ -113,6 +110,7 @@ export default function HoursLostLateStarts() {
       title="Hours Lost to First Case Late Starts"
       data={chartData}
       chartConfig={chartConfig}
+      subtitle={""}
     />
   )
 }

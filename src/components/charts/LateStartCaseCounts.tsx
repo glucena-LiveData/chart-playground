@@ -1,8 +1,4 @@
-"use client"
-
-import { getShortMonth } from "@/lib/enumerations"
-
-import { AreaGraph } from "./../ui/area-graph"
+import { AreaGraph, ChartConfig } from "./../ui/area-graph"
 
 const chartData = [
   {
@@ -67,15 +63,15 @@ const chartData = [
   },
 ]
 
-const chartConfig = {
+const chartConfig: ChartConfig = {
   x_axis: {
     label: "Month of Room In",
-    data_key: "case_month",
-    formatter: (value: number) => getShortMonth(value),
+    dataKey: "case_month",
+    formatter: (value: string) => value, //getShortMonth(value),
   },
   y_axis: {
     label: "Late Start Case Count",
-    formatter: (value: number) => `Late Start Case Count: ${value}`,
+    formatter: (value: string) => `Late Start Case Count: ${value}`,
     dataKey: "Late Start Case Count",
     color: "#1B41FF",
   },
@@ -85,6 +81,7 @@ export default function LateStartCaseCounts() {
   return (
     <AreaGraph
       title="Late Start Case Counts"
+      subtitle=""
       data={chartData}
       chartConfig={chartConfig}
     />

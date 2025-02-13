@@ -1,4 +1,4 @@
-import { AreaGraph } from "../ui/area-graph"
+import { AreaGraph, ChartConfig } from "../ui/area-graph"
 
 const chartData = [
   {
@@ -63,17 +63,17 @@ const chartData = [
   },
 ]
 
-const chartConfig = {
+const chartConfig: ChartConfig = {
   x_axis: {
     label: "Month of Room In",
     dataKey: "case_month",
-    formatter: (value: number) => value, //format with date-fns,
+    formatter: (value: string) => value, //format with date-fns,
   },
   y_axis: {
     label: "% of First Case On-Time Starts",
     dataKey: "Pct FCOS",
-    formatter: (value: number) => `% of First Case On-Time Starts: ${value}%`,
-    tickFormatter: (value: number) => `${value}%`,
+    formatter: (value: string) => `% of First Case On-Time Starts: ${value}%`,
+    tickFormatter: (value: string) => `${value}%`,
     color: "#0096DD",
   },
 }

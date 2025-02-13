@@ -1,6 +1,5 @@
-import { Area, AreaChart, Text, XAxis, YAxis } from "recharts"
+import { Area, AreaChart, XAxis, YAxis } from "recharts"
 
-import { LineChartConfig } from "@/types/chart-config"
 import {
   Card,
   CardContent,
@@ -14,10 +13,20 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart"
 
+export interface ChartConfig {
+  [key: string]: {
+    color?: string
+    dataKey: string
+    formatter: (value: string) => string
+    label: string
+    tickFormatter?: (value: string) => string
+  }
+}
+
 interface AreaGraphProps<TData> {
   title: string
   subtitle: string
-  chartConfig: { [key: string]: LineChartConfig }
+  chartConfig: ChartConfig
   data: TData[]
 }
 
@@ -29,15 +38,15 @@ export function AreaGraph<TData>({
 }: AreaGraphProps<TData>) {
   const [xAxisConfig, yAxisConfig] = Object.values(chartConfig)
   // Calculate the minimum and maximum value of data range and round up to the nearest 10
-  const maxYValue =
-    Math.ceil(Math.max(...data.map((d) => d[yAxisConfig.dataKey])) / 10) * 10
-  const minValue =
-    Math.floor(Math.min(...data.map((d) => d[yAxisConfig.dataKey])) / 10) * 10 -
-    10
+  const maxYValue = 100
+  // Math.ceil(Math.max(...data.map((d) => d[yAxisConfig.dataKey])) / 10) * 10
+  const minValue = 0
+  // Math.floor(Math.min(...data.map((d) => d[yAxisConfig.dataKey])) / 10) * 10 -
+  // 10
   const minYValue = minValue < 0 ? 0 : minValue
 
   // Generate a unique gradient ID based on the yAxisConfig.color
-  const gradientId = `colorGradient-${yAxisConfig.color.replace("#", "")}`
+  const gradientId = `colorGradient-${yAxisConfig.color?.replace("#", "")}`
 
   return (
     <Card className="visualization-container">
@@ -77,21 +86,21 @@ export function AreaGraph<TData>({
                     ? xAxisConfig.formatter
                     : (value) => value
                 }
-                tick={<RotatedAxisTick />}
+                // tick={<RotatedAxisTick />}
               />
               <ChartTooltip
                 content={
                   <ChartTooltipContent
                     hideIndicator={true}
                     hideLabel={false}
-                    labelKey={yAxisConfig.datakey}
+                    labelKey={yAxisConfig.dataKey}
                   />
                 }
-                formatter={
-                  yAxisConfig.formatter
-                    ? yAxisConfig.formatter
-                    : (value) => value
-                }
+                // formatter={
+                //   yAxisConfig.formatter
+                //     ? yAxisConfig.formatter
+                //     : (value) => value
+                // }
               />
               <YAxis
                 type="number"
@@ -123,13 +132,18 @@ export function AreaGraph<TData>({
   )
 }
 
-const RotatedAxisTick = (props) => {
-  const { x, y, payload, tickFormatter } = props
-  return (
-    <g transform={`translate(${x},${y})`}>
-      <Text x={3} y={0} dy={3} textAnchor="end" transform="rotate(-90)">
-        {tickFormatter(payload.value)}
-      </Text>
-    </g>
-  )
-}
+// const RotatedAxisTick = (props: {
+//   x: number
+//   y: number
+//   payload: { value: string }
+//   tickFormatter: (value: string) => string
+// }) => {
+//   const { x, y, payload, tickFormatter } = props
+//   return (
+//     <g transform={`translate(${x},${y})`}>
+//       <Text x={3} y={0} dy={3} textAnchor="end" transform="rotate(-90)">
+//         {tickFormatter(payload.value)}
+//       </Text>
+//     </g>
+//   )
+// }
