@@ -26,9 +26,7 @@
     /* For tailwindcss */
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src", "src/.tsx"]

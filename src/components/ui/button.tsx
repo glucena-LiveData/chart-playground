@@ -9,7 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        invisible: 
+        invisible:
           "bg-transparent, hover:bg-transparent, hover:border-none, border-none, font-bold, text-primary focus-visible:outline-none focus-visible:ring-0 focus:outline-none focus:ring-0",
         default:
           "bg-primary text-primary-foreground shadow hover:bg-primary/90",
