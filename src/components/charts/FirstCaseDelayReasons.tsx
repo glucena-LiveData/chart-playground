@@ -11,66 +11,67 @@ interface FirstCaseDelayReasons {
   minutes_delay: number
 }
 
-interface CustomColumnDef<TData, TValue> extends ColumnDef<TData, TValue> {
-  type?: string
-  maxBar?: number
-}
+type CustomColumnDef<TData, TValue> = ColumnDef<TData, TValue> & {
+	type?: string
+	maxBar?: number
+  }
+  
 
 const visualizationData = [
   {
     ehr_delay_reasons: "None",
     "FC Count": 7,
-    "Median Actual Minutes\/Case": 10.0,
+    "Median Actual Minutes Case": 10.0,
   },
   {
     ehr_delay_reasons: "ANESTHESIA NOT AVAILABLE",
     "FC Count": 2,
-    "Median Actual Minutes\/Case": 13.0,
+    "Median Actual Minutes Case": 13.0,
   },
   {
     ehr_delay_reasons: "ANESTHESIA PRE-OP NOTE",
     "FC Count": 1,
-    "Median Actual Minutes\/Case": 10.0,
+    "Median Actual Minutes Case": 10.0,
   },
   {
     ehr_delay_reasons: "ATTENDING SURGEON NOTE NEEDED",
     "FC Count": 3,
-    "Median Actual Minutes\/Case": 14.0,
+    "Median Actual Minutes Case": 14.0,
   },
   {
     ehr_delay_reasons: "CONSENT NOT COMPLETED",
     "FC Count": 3,
-    "Median Actual Minutes\/Case": 12.0,
+    "Median Actual Minutes Case": 12.0,
   },
   {
     ehr_delay_reasons: "LAB RESULTS",
     "FC Count": 1,
-    "Median Actual Minutes\/Case": 97.0,
+    "Median Actual Minutes Case": 97.0,
   },
   {
     ehr_delay_reasons: "ORDERS NOT AVAILABLE",
     "FC Count": 1,
-    "Median Actual Minutes\/Case": 34.0,
+    "Median Actual Minutes Case": 34.0,
   },
   {
     ehr_delay_reasons: "PATIENT HAS CONCERNS",
     "FC Count": 1,
-    "Median Actual Minutes\/Case": 29.0,
+    "Median Actual Minutes Case": 29.0,
   },
   {
     ehr_delay_reasons: "PREOP UNIT DELAY",
     "FC Count": 1,
-    "Median Actual Minutes\/Case": 3.0,
+    "Median Actual Minutes Case": 3.0,
   },
   {
     ehr_delay_reasons: "ROOM NOT READY",
     "FC Count": 2,
-    "Median Actual Minutes\/Case": 7.5,
+    "Median Actual Minutes Case": 7.5,
   },
   {
     ehr_delay_reasons: "VENDOR NOT AVAILABLE",
     "FC Count": 1,
-    "Median Actual Minutes\/Case": 10.0,
+    "Median Actual Minutes Case": 10.0,
   },
 ]
 
@@ -91,7 +92,7 @@ const columns: CustomColumnDef<FirstCaseDelayReasons, any>[] = [
     },
   },
   {
-    accessorKey: "Median Actual Minutes\/Case",
+    accessorKey: "Median Actual Minutes Case",
     header: "Median Minutes Delayed By",
     type: "barChartColumn",
     maxBar: Math.max(...visualizationData.map((d) => d["PctFCOS"])),

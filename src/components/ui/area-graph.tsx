@@ -1,11 +1,10 @@
-import { Area, AreaChart, Text, Tooltip, XAxis, YAxis } from "recharts"
+import { Area, AreaChart, Text, XAxis, YAxis } from "recharts"
 
 import { LineChartConfig } from "@/types/chart-config"
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -16,8 +15,8 @@ import {
 } from "@/components/ui/chart"
 
 interface AreaGraphProps<TData> {
-  title: String
-  subtitle: String
+  title: string
+  subtitle: string
   chartConfig: { [key: string]: LineChartConfig }
   data: TData[]
 }

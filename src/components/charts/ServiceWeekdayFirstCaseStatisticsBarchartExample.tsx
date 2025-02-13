@@ -18,7 +18,7 @@ interface FirstCaseSummary {
   "Pct FCOS": number
 }
 
-interface CustomColumnDef<TData, TValue> extends ColumnDef<TData, TValue> {
+type CustomColumnDef<TData, TValue> = ColumnDef<TData, TValue> & {
   type?: string
   maxBar?: number
 }

@@ -7,17 +7,14 @@ import {
   SortingState,
   useReactTable,
 } from "@tanstack/react-table"
-import { Bar, BarChart, Tooltip, XAxis, YAxis } from "recharts"
 
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import {
   Table,
   TableBody,
