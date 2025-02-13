@@ -76,7 +76,7 @@ export default function SummaryDataTable() {
   return (
     <DataTable
       title="First Case Summary Statistics"
-	  subtitle="Summary of First Case Statistics"
+      subtitle="Summary of First Case Statistics"
       columns={columns}
       data={tableData}
     />

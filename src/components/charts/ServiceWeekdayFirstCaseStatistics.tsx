@@ -111,7 +111,7 @@ export default function ServiceWeekdayFirstCaseStatsTable() {
   return (
     <DataTable
       title="Service Weekday First Case Statistics"
-	  subtitle=""
+      subtitle=""
       columns={columns}
       data={visualizationData}
     />

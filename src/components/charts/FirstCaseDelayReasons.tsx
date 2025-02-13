@@ -11,7 +11,6 @@ interface FirstCaseDelayReasons {
   minutes_delay: number
 }
 
-
 const visualizationData = [
   {
     ehr_delay_reasons: "None",
