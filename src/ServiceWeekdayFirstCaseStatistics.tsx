@@ -1,6 +1,4 @@
 "use client"
-import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis, Text } from "recharts"
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
 import { 
 	ColumnDef,
 } from "@tanstack/react-table"
@@ -13,32 +11,10 @@ interface FirstCaseSummary {
 	"Pct FCOS": number;
 }
 
-const columns: ColumnDef<FirstCaseSummary>[] = [
-	{
-		accessorKey: "scheduled_service",
-		header: ({ column }) => {
-			return addSortButton(column, "Service");
-		},
-		cell: info => {
-			const value = info.getValue();
-			return <div className="font-bold">{value}</div>		
-		},
-	},
-	{
-		accessorKey: "FC Count",
-		header: ({ column }) => {
-			return addSortButton(column, "First Case Count");
-		},
-	},
-	// {
-	// 	accessorKey: "Pct FCOS",
-	// 	header: "% of First Cases On Time",
-	// 	cell: (info: { getValue: () => number | string }) => {
-	// 		const value = info.getValue();
-	// 		return typeof value === 'number' ? Math.round(value) : value;
-	// 	},
-	// },
-];
+interface CustomColumnDef<TData, TValue> extends ColumnDef<TData, TValue> {
+	type?: string;
+	maxBar?: number;
+}
 
 const visualizationData = [
 	{
@@ -108,76 +84,35 @@ const visualizationData = [
 	}
 ]
 
-const chartConfig = {
-	percent_first_case_on_time: {
-	  label: "% of First Cases On-Time",
-	  color: "#2471a3",
+const columns: CustomColumnDef<FirstCaseSummary, any>[] = [
+	{
+		accessorKey: "scheduled_service",
+		header: ({ column }) => {
+			return addSortButton(column, "Service");
+		},
+		cell: info => {return info.getValue()}
 	},
-} satisfies ChartConfig
+	{
+		accessorKey: "FC Count",
+		header: ({ column }) => {
+			return addSortButton(column, "First Case Count");
+		},
+	},
+	{
+		accessorKey: "Pct FCOS",
+		header: "% First Caes On Time",
+		type: "barChartColumn",
+		maxBar: 100,
+		cell: (info: { getValue: () => number | string }) => {
+			const value = info.getValue();
+			return typeof value === 'number' ? `${Math.round(value)}%` : value;
+		},
+	},
+];
 
-export function ServiceWeekdayFirstCaseStatsTable() {
+export default function ServiceWeekdayFirstCaseStatsTable() {
   return (
 		<DataTable title="Service Weekday First Case Statistics" columns={columns} data={visualizationData} />
-	)
-}
-
-export function ServiceWeekdayFirstCaseStatsChart() {
-	return (
-	  <div className="visualization-container">
-		  <h1 className="chart-title">Service Weekday First Case Statistics</h1>
-		  <div className="live-data-vertical-barchart" >
-		  <ChartContainer config={chartConfig} className="h-[550px] w-[700px]">
-          <BarChart
-            accessibilityLayer
-						width={300}
-						height={550}
-            data={visualizationData}
-            layout="vertical"
-            margin={{
-						top: 40,
-						bottom: 20,
-            right: 60,
-			  		left: 80
-            }}
-          >
-            <CartesianGrid horizontal={false} />
-            <YAxis
-              dataKey="scheduled_service"
-              type="category"
-              tickLine={false}
-              tickMargin={5}
-              axisLine={false}
-              
-            />
-            <XAxis 
-							dataKey="Pct FCOS" 
-							type="number" 
-							tickFormatter={(value) => `${value}%`}
-							label={{ value: "% of First Cases On Time", position: "insideBottom", offset: -5 }}
-						/>
-            <ChartTooltip
-              cursor={false}
-              content={<ChartTooltipContent indicator="line" />}
-            />
-            <Bar
-              dataKey="Pct FCOS"
-              layout="vertical"
-              fill="#7B71FA"
-              radius={4}
-            >
-              <LabelList
-                dataKey="Pct FCOS"
-                position="right"
-                offset={8}
-                className="fill-foreground font-bold"
-                fontSize={12}
-								formatter={(value) => `${Math.round(value)}%`}
-              />
-            </Bar>
-          </BarChart>
-          </ChartContainer>
-		  </div>
-	  </div>
 	)
 }
 

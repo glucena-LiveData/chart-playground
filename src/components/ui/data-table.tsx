@@ -1,4 +1,14 @@
 import * as React from "react"
+import { Bar, BarChart, XAxis, YAxis, Tooltip } from "recharts"
+import { ChartConfig, ChartContainer } from "@/components/ui/chart"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import {
   ColumnDef,
   SortingState,
@@ -17,17 +27,19 @@ import {
   TableRow,
 } from "@/components/ui/table"
  
-interface DataTableProps<String, TData, TValue> {
-  title: String
-  columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+interface DataTableProps<TData, TValue> {
+  title: string;
+  subtitle: string;
+  columns: ColumnDef<TData, TValue>[];
+  data: TData[];
 }
 
-export function DataTable<String, TData, TValue>({
+export function DataTable<TData, TValue>({
   title,
+  subtitle,
   columns,
   data,
-}: DataTableProps<String, TData, TValue>) {
+}: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
  
   const table = useReactTable({
@@ -42,17 +54,20 @@ export function DataTable<String, TData, TValue>({
   })
  
   return (
-    <div className="visualization-container w-full">
-      <h1 className="chart-title">{title}</h1>
-      <div className="live-data-data-table w-full" >
-        <div className="border-b">
-          <Table>
-            <TableHeader>
+    <Card className="visualization-container">
+			<CardHeader>
+				<CardTitle>{title}</CardTitle>
+				<CardDescription>{subtitle}</CardDescription>
+			</CardHeader>
+			<CardContent>
+        <div className="live-data-data-table w-full" >
+          <Table className="w-full border-collapse border-none">
+            <TableHeader className="background-none">
               {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
+                <TableRow className="border-none" key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <TableHead key={header.id}>
+                      <TableHead className="font-bold text-secondary-foreground" key={header.id}>
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -69,12 +84,30 @@ export function DataTable<String, TData, TValue>({
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
                   <TableRow
+                    className="border-none"
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        {cell.column.columnDef.type === 'barChartColumn' ? (
+                          <div className="flex items-center">
+                            <div className="relative w-[150px] h-4">
+                              <div
+                                className="absolute top-0 left-0 h-full"
+                                style={{ 
+                                  width: `${cell.getValue()/(cell.column.columnDef.maxBar ? cell.column.columnDef.maxBar : 100) * 100}%`, 
+                                  backgroundColor: "#7B71FA",
+                                  borderTopRightRadius: '4px',
+                                  borderBottomRightRadius: '4px'
+                                }}
+                              ></div>
+                            </div>
+                            <div className="ml-2 text-right w-[50px]">{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
+                          </div>
+                        ) : (
+                          flexRender(cell.column.columnDef.cell, cell.getContext())
+                        )}
                       </TableCell>
                     ))}
                   </TableRow>
@@ -89,8 +122,8 @@ export function DataTable<String, TData, TValue>({
             </TableBody>
           </Table>
         </div>
-      </div>
-    </div>
+      </CardContent>
+    </Card>
   )
 }
 

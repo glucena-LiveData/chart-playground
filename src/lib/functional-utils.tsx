@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button"
 
 
 /**
- * Formats a number to a specified number of decimal places.
- * If the value is not a number, it returns the value as is.
+ * Table column decorator.
+ * Converts a column to a sort button.
  *
  * @param column - Column where button will be added.
  * @param value - Column header string.
@@ -13,12 +13,12 @@ import { Button } from "@/components/ui/button"
  */
 export const addSortButton = (column: Column<any, any>, value: string) => {
 	return(	
-		<Button
-		  variant="ghost"
+		<Button className="bg-transparent"
+		  variant="invisible"
 		  onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
 		>
 		  {value}
-		  <ArrowUpDown className="ml-2 h-4 w-4" />
+		  {/* <ArrowUpDown className="ml-2 h-4 w-4" /> */}
 		</Button>
 	)
 }
