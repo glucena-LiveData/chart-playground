@@ -2,7 +2,7 @@
 import { LineChartConfig } from "@/types/chart-config"
 import { getShortMonth } from "@/lib/enumerations"
 import {numericFormat} from "@/lib/formatting-utils"
-import { AreaGraph } from "./components/ui/area-graph"
+import { AreaGraph } from "../ui/area-graph"
 
 const chartData = [
 	{

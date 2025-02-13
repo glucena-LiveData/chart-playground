@@ -1,12 +1,12 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import FirstCaseSummaryStats from './FirstCaseSummaryStats.tsx'
-import PercentFCOS from './PercentFCOS.tsx'
+import FirstCaseSummaryStats from './components/charts/FirstCaseSummaryStats.tsx'
+import PercentFCOS from './components/charts/PercentFCOS.tsx'
 import LateStartCaseCounts from './LateStartCaseCounts.tsx'
-import HoursLostLateStarts from './HoursLostLateStarts.tsx'
-import ServiceWeekdayFirstCaseStatsTable from './ServiceWeekdayFirstCaseStatistics.tsx'
-import FirstCaseDelayReasonsTable from './FirstCaseDelayReasons.tsx'
+import HoursLostLateStarts from './components/charts/HoursLostLateStarts.tsx'
+import ServiceWeekdayFirstCaseStatsTable from './components/charts/ServiceWeekdayFirstCaseStatistics.tsx'
+import FirstCaseDelayReasonsTable from './components/charts/FirstCaseDelayReasons.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
