@@ -11,11 +11,6 @@ interface FirstCaseSummary {
   "Pct FCOS": number
 }
 
-type CustomColumnDef<TData, TValue> = ColumnDef<TData, TValue> & {
-  type?: string
-  maxBar?: number
-}
-
 const visualizationData = [
   {
     scheduled_service: "Anesthesiology",
@@ -84,7 +79,7 @@ const visualizationData = [
   },
 ]
 
-const columns: CustomColumnDef<FirstCaseSummary, any>[] = [
+const columns: ColumnDef<FirstCaseSummary>[] = [
   {
     accessorKey: "scheduled_service",
     header: ({ column }) => {
@@ -116,6 +111,7 @@ export default function ServiceWeekdayFirstCaseStatsTable() {
   return (
     <DataTable
       title="Service Weekday First Case Statistics"
+	  subtitle=""
       columns={columns}
       data={visualizationData}
     />

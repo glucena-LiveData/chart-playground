@@ -11,11 +11,6 @@ interface FirstCaseDelayReasons {
   minutes_delay: number
 }
 
-type CustomColumnDef<TData, TValue> = ColumnDef<TData, TValue> & {
-	type?: string
-	maxBar?: number
-  }
-  
 
 const visualizationData = [
   {
@@ -75,7 +70,7 @@ const visualizationData = [
   },
 ]
 
-const columns: CustomColumnDef<FirstCaseDelayReasons, any>[] = [
+const columns: ColumnDef<FirstCaseDelayReasons>[] = [
   {
     accessorKey: "ehr_delay_reasons",
     header: ({ column }) => {

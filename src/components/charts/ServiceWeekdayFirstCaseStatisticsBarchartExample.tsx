@@ -18,11 +18,6 @@ interface FirstCaseSummary {
   "Pct FCOS": number
 }
 
-type CustomColumnDef<TData, TValue> = ColumnDef<TData, TValue> & {
-  type?: string
-  maxBar?: number
-}
-
 const chartConfig = {
   percent_first_case_on_time: {
     label: "% of First Cases On-Time",
@@ -30,7 +25,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig
 
-const columns: CustomColumnDef<FirstCaseSummary, any>[] = [
+const columns: ColumnDef<FirstCaseSummary>[] = [
   {
     accessorKey: "scheduled_service",
     header: ({ column }) => {
@@ -130,6 +125,7 @@ export function ServiceWeekdayFirstCaseStatsTable() {
   return (
     <DataTable
       title="Service Weekday First Case Statistics"
+      subtitle=""
       columns={columns}
       data={visualizationData}
     />

@@ -90,32 +90,10 @@ export function DataTable<TData, TValue>({
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {cell.column.columnDef.type === "barChartColumn" ? (
-                          <div className="flex items-center">
-                            <div className="relative w-[150px] h-4">
-                              <div
-                                className="absolute top-0 left-0 h-full"
-                                style={{
-                                  width: `${(cell.getValue() / (cell.column.columnDef.maxBar ? cell.column.columnDef.maxBar : 100)) * 100}%`,
-                                  backgroundColor: "#7B71FA",
-                                  borderTopRightRadius: "4px",
-                                  borderBottomRightRadius: "4px",
-                                }}
-                              ></div>
-                            </div>
-                            <div className="ml-2 text-right w-[50px]">
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext()
-                              )}
-                            </div>
-                          </div>
-                        ) : (
-                          flexRender(
+                        {flexRender(
                             cell.column.columnDef.cell,
                             cell.getContext()
-                          )
-                        )}
+                          )}
                       </TableCell>
                     ))}
                   </TableRow>

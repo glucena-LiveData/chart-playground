@@ -10,7 +10,7 @@ type FirstCaseSummary = {
   "Late Starts": number
   "% of First Cases On-Time": number
   "% Late Start": number
-  "Pct FC Delayed <15": number
+  "Pct FC Delayed < 15": number
   "Pct FC Delayed 15-30": number
   "Pct FC Delayed > 30": number
   "Total Hours Lost": number
@@ -76,6 +76,7 @@ export default function SummaryDataTable() {
   return (
     <DataTable
       title="First Case Summary Statistics"
+	  subtitle="Summary of First Case Statistics"
       columns={columns}
       data={tableData}
     />
