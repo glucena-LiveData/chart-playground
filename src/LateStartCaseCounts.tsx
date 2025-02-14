@@ -1,7 +1,7 @@
 "use client"
-import { AreaChartConfig } from "@/types/chart-config"
+import { LineChartConfig } from "@/types/chart-config"
 import { getShortMonth } from "@/lib/enumerations"
-import { AreaGraph } from "../../components/ui/area-graph"
+import { AreaGraph } from "./components/ui/area-graph"
 
 const chartData = [
 	{
@@ -78,7 +78,7 @@ const chartConfig = {
 		dataKey: "Late Start Case Count",
 		color: "#1B41FF",
 	}
-} satisfies AreaChartConfig;
+} satisfies LineChartConfig;
 
 export default function LateStartCaseCounts() {
 	return (

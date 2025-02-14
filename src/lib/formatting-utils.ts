@@ -7,17 +7,9 @@
  * @param decimals - The number of decimal places to format the number to.
  * @returns The formatted number as a string, or the original value if it's not a number.
  */
-export const numericFormat = (value: any, decimals: number, format: string | undefined = undefined): string => {
-	if (typeof value != 'number')
-		return value
-
-	const formattedValue = value.toFixed(decimals);
-  if (typeof format === 'undefined')
-		return formattedValue;
-
-	// Room for adding other types of numeric formatting, such as currency $
-	if (format === '%')
-		return `${formattedValue}%`
-	else
-		return formattedValue
+export const numericFormat = (value: any, decimals: number): string => {
+	if (typeof value === 'number') {
+	  return value.toFixed(decimals);
+  }
+	return value;
 }

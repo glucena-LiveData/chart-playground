@@ -90,9 +90,7 @@ const columns: CustomColumnDef<FirstCaseDelayReasons, any>[] = [
 	},
 	{
 		accessorKey: "Median Actual Minutes\/Case",
-		header: ({ column }) => {
-			return addSortButton(column, "Median Minutes Delayed By");
-		},
+		header: "Median Minutes Delayed By",
 		type: "barChartColumn",
 		maxBar: (Math.max(...visualizationData.map(d => d["PctFCOS"]))),
 		cell: (info: { getValue: () => number | string }) => {
@@ -107,3 +105,6 @@ export default function FirstCaseDelayReasonsTable() {
 		<DataTable title="First Case Delay Reasons" columns={columns} data={visualizationData} />
 	)
 }
+
+
+

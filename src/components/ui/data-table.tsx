@@ -1,4 +1,6 @@
 import * as React from "react"
+import { Bar, BarChart, XAxis, YAxis, Tooltip } from "recharts"
+import { ChartConfig, ChartContainer } from "@/components/ui/chart"
 import {
   Card,
   CardContent,
@@ -27,14 +29,14 @@ import {
  
 interface DataTableProps<TData, TValue> {
   title: string;
-  subtitle: string | undefined;
+  subtitle: string;
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
 export function DataTable<TData, TValue>({
   title,
-  subtitle = " ",
+  subtitle,
   columns,
   data,
 }: DataTableProps<TData, TValue>) {

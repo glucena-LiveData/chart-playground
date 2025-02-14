@@ -6,20 +6,16 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-	ChartConfig,
 } from "@/components/ui/card"
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
+import { LineChartConfig } from "@/types/chart-config"
 
 
 interface AreaGraphProps<TData> {
 	title: String;
 	subtitle: String;
-	chartConfig: { [key: string]: AreaChartConfig };
+	chartConfig: { [key: string]: LineChartConfig };
 	data: TData[];
-}
-
-export interface AreaChartConfig extends ChartConfig {
-  data_key: string;
 }
 
 export function AreaGraph<TData>({
@@ -31,7 +27,7 @@ export function AreaGraph<TData>({
 	const [xAxisConfig, yAxisConfig] = Object.values(chartConfig);
 	// Calculate the minimum and maximum value of data range and round up to the nearest 10
 	const maxYValue = Math.ceil(Math.max(...data.map(d => d[yAxisConfig.dataKey])) / 10) * 10;
-	const minValue = Math.floor(Math.min(...data.map(d => d[yAxisConfig.dataKey])) / 10) * 10 - 20;
+	const minValue = Math.floor(Math.min(...data.map(d => d[yAxisConfig.dataKey])) / 10) * 10 - 10;
 	const minYValue = (minValue < 0)? 0 : minValue;
 
 	// Generate a unique gradient ID based on the yAxisConfig.color

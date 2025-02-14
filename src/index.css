@@ -151,19 +151,19 @@ h1.chart-title {
   display: flex;
   height: fit-contents;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: left;
   border-radius: 8px;
   padding: 12px;
   border: 1px solid #f0f0f0;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.12); /* Shadow below and to the right */
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1); /* Shadow below and to the right */
 }
 
 .visualization-row {
   display: flex;
   height: fit-contents;
   flex-direction: row;
-  justify-content: left space-between; 
-  gap: 20px; /* Optional: Adds space between the visualization components */
+  justify-content: space-between; 
+  gap: 5px; /* Optional: Adds space between the visualization components */
   margin-bottom: 20px;
   vertical-align: top;
 }
