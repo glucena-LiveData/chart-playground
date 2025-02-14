@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/chart"
 
 interface Axis<TData> {
-  dataKey: keyof TData
+  key: keyof TData
   formatter: (value: unknown) => string
   color: string
 }
@@ -31,7 +31,7 @@ export interface AreaGraphConfig<TData> {
 
 interface AreaGraphProps<TData> extends React.HTMLAttributes<HTMLDivElement> {
   title: string
-  subtitle: string
+  subtitle?: string
   configuration: AreaGraphConfig<TData>
   data: TData[]
 }
@@ -49,7 +49,7 @@ export function AreaGraph<TData>({
 
   return (
     <Card {...props} className={cn("flex flex-col", props.className)}>
-      <CardHeader className="flex flex-col">
+      <CardHeader className="flex flex-col h-[80px]">
         <CardTitle>{title}</CardTitle>
         <CardDescription>{subtitle}</CardDescription>
       </CardHeader>
@@ -63,7 +63,7 @@ export function AreaGraph<TData>({
               </linearGradient>
             </defs>
             <XAxis
-              dataKey={x.dataKey.toString()}
+              dataKey={x.key.toString()}
               tickLine={false}
               tickMargin={10}
               axisLine={false}
@@ -87,7 +87,7 @@ export function AreaGraph<TData>({
                 <ChartTooltipContent
                   hideIndicator={true}
                   hideLabel={false}
-                  labelKey={y.dataKey.toString()}
+                  labelKey={y.key.toString()}
                 />
               }
               formatter={label}
@@ -101,7 +101,7 @@ export function AreaGraph<TData>({
               width={40}
             />
             <Area
-              dataKey={y.dataKey.toString()}
+              dataKey={y.key.toString()}
               label={"y.label"}
               type="natural"
               stroke={y.color}

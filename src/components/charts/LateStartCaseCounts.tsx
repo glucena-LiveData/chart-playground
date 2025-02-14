@@ -1,89 +1,112 @@
-import { AreaGraph, ChartConfig } from "./../ui/area-graph"
+import { format } from "date-fns"
 
-const chartData = [
+import { getMaxCeiledValue, getMinFlooredValue } from "@/lib/utils"
+
+import { AreaGraph } from "./../ui/area-graph"
+
+interface LateStartCaseCounts {
+  caseYear: number
+  caseMonth: number
+  caseCount: number
+}
+
+const data: LateStartCaseCounts[] = [
   {
-    case_year: 2024,
-    case_month: 1,
-    "Late Start Case Count": 40,
+    caseYear: 2024,
+    caseMonth: 1,
+    caseCount: 40,
   },
   {
-    case_year: 2024,
-    case_month: 2,
-    "Late Start Case Count": 39,
+    caseYear: 2024,
+    caseMonth: 2,
+    caseCount: 39,
   },
   {
-    case_year: 2024,
-    case_month: 3,
-    "Late Start Case Count": 21,
+    caseYear: 2024,
+    caseMonth: 3,
+    caseCount: 21,
   },
   {
-    case_year: 2024,
-    case_month: 4,
-    "Late Start Case Count": 27,
+    caseYear: 2024,
+    caseMonth: 4,
+    caseCount: 27,
   },
   {
-    case_year: 2024,
-    case_month: 5,
-    "Late Start Case Count": 58,
+    caseYear: 2024,
+    caseMonth: 5,
+    caseCount: 58,
   },
   {
-    case_year: 2024,
-    case_month: 6,
-    "Late Start Case Count": 30,
+    caseYear: 2024,
+    caseMonth: 6,
+    caseCount: 30,
   },
   {
-    case_year: 2024,
-    case_month: 7,
-    "Late Start Case Count": 44,
+    caseYear: 2024,
+    caseMonth: 7,
+    caseCount: 44,
   },
   {
-    case_year: 2024,
-    case_month: 8,
-    "Late Start Case Count": 35,
+    caseYear: 2024,
+    caseMonth: 8,
+    caseCount: 35,
   },
   {
-    case_year: 2024,
-    case_month: 9,
-    "Late Start Case Count": 25,
+    caseYear: 2024,
+    caseMonth: 9,
+    caseCount: 25,
   },
   {
-    case_year: 2024,
-    case_month: 10,
-    "Late Start Case Count": 18,
+    caseYear: 2024,
+    caseMonth: 10,
+    caseCount: 18,
   },
   {
-    case_year: 2024,
-    case_month: 11,
-    "Late Start Case Count": 53,
+    caseYear: 2024,
+    caseMonth: 11,
+    caseCount: 53,
   },
   {
-    case_year: 2024,
-    case_month: 12,
-    "Late Start Case Count": 23,
+    caseYear: 2024,
+    caseMonth: 12,
+    caseCount: 23,
   },
 ]
 
-const chartConfig: ChartConfig = {
-  x_axis: {
-    label: "Month of Room In",
-    dataKey: "case_month",
-    formatter: (value: string) => value, //getShortMonth(value),
-  },
-  y_axis: {
-    label: "Late Start Case Count",
-    formatter: (value: string) => `Late Start Case Count: ${value}`,
-    dataKey: "Late Start Case Count",
-    color: "#1B41FF",
-  },
-}
+export function LateStartCaseCounts() {
+  const maxY = getMaxCeiledValue(data, "caseCount")
+  const minY = getMinFlooredValue(data, "caseCount")
 
-export default function LateStartCaseCounts() {
+  const label = (value: unknown) => {
+    return `Late Start Case Count: ${value}`
+  }
+
   return (
     <AreaGraph
+      className="w-[700px]"
       title="Late Start Case Counts"
-      subtitle=""
-      data={chartData}
-      chartConfig={chartConfig}
+      data={data}
+      configuration={{
+        label: label,
+        x: {
+          key: "caseMonth",
+          color: "#1B41FF",
+          formatter: (value) => {
+            const date = new Date()
+
+            date.setMonth((value as number) - 1)
+
+            return format(date, "MMM")
+          },
+        },
+        y: {
+          key: "caseCount",
+          color: "#1B41FF",
+          max: maxY,
+          min: minY,
+          formatter: (value) => `${value}`,
+        },
+      }}
     />
   )
 }

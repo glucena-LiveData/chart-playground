@@ -1,5 +1,7 @@
 import { format } from "date-fns"
 
+import { getMaxCeiledValue, getMinFlooredValue } from "@/lib/utils"
+
 import { AreaGraph } from "../ui/area-graph"
 
 interface PercentFCOS {
@@ -72,9 +74,8 @@ const data: PercentFCOS[] = [
 ]
 
 export function PercentFCOS() {
-  const maxY = Math.ceil(Math.max(...data.map((d) => d.percent)) / 10) * 10
-  let minY = Math.floor(Math.min(...data.map((d) => d.percent)) / 10) * 10 - 10
-  minY = minY < 0 ? 0 : minY
+  const maxY = getMaxCeiledValue(data, "percent")
+  const minY = getMinFlooredValue(data, "percent")
 
   const label = (value: unknown) => {
     return `% of First Case On-Time Starts: ${Number(value).toFixed(2)}%`
@@ -89,8 +90,8 @@ export function PercentFCOS() {
       configuration={{
         label: label,
         x: {
-          dataKey: "caseMonth",
-          color: "#7B71FA",
+          key: "caseMonth",
+          color: "#0096DD",
           formatter: (value) => {
             const date = new Date()
 
@@ -100,8 +101,8 @@ export function PercentFCOS() {
           },
         },
         y: {
-          dataKey: "percent",
-          color: "#7B71FA",
+          key: "percent",
+          color: "#0096DD",
           max: maxY,
           min: minY,
           formatter: (value) => `${value}%`,

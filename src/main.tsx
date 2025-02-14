@@ -1,6 +1,7 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 
+import { LateStartCaseCounts } from "./components/charts/LateStartCaseCounts.tsx"
 // import FirstCaseDelayReasonsTable from "./components/charts/FirstCaseDelayReasons.tsx"
 // import ServiceWeekdayFirstCaseStatsTable from "./components/charts/ServiceWeekdayFirstCaseStatistics.tsx"
 // import FirstCaseSummaryStats from "./components/charts/FirstCaseSummaryStats.tsx"
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")!).render(
     <div>
       <div className="flex flex-row gap-6">
         <PercentFCOS />
+        <LateStartCaseCounts />
         {/* <LateStartCaseCounts />
       <HoursLostLateStarts /> */}
       </div>
