@@ -4,7 +4,7 @@ import { format } from "date-fns"
 
 import { getMaxCeiledValue, getMinFlooredValue } from "@/lib/utils"
 
-import { AreaGraph, ChartConfig } from "../ui/area-graph"
+import { AreaGraph } from "../ui/area-graph"
 
 interface HoursLostLateStarts {
   caseYear: number
