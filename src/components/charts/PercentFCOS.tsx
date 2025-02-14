@@ -1,90 +1,113 @@
-import { AreaGraph, ChartConfig } from "../ui/area-graph"
+import { format } from "date-fns"
 
-const chartData = [
+import { getMaxCeiledValue, getMinFlooredValue } from "@/lib/utils"
+
+import { AreaGraph } from "../ui/area-graph"
+
+interface PercentFCOS {
+  caseYear: number
+  caseMonth: number
+  percent: number
+}
+
+const data: PercentFCOS[] = [
   {
-    case_year: 2024,
-    case_month: 1,
-    "Pct FCOS": 74.52229299363057,
+    caseYear: 2024,
+    caseMonth: 1,
+    percent: 74.52229299363057,
   },
   {
-    case_year: 2024,
-    case_month: 2,
-    "Pct FCOS": 72.53521126760563,
+    caseYear: 2024,
+    caseMonth: 2,
+    percent: 72.53521126760563,
   },
   {
-    case_year: 2024,
-    case_month: 3,
-    "Pct FCOS": 86.70886075949366,
+    caseYear: 2024,
+    caseMonth: 3,
+    percent: 86.70886075949366,
   },
   {
-    case_year: 2024,
-    case_month: 4,
-    "Pct FCOS": 83.43558282208589,
+    caseYear: 2024,
+    caseMonth: 4,
+    percent: 83.43558282208589,
   },
   {
-    case_year: 2024,
-    case_month: 5,
-    "Pct FCOS": 71.42857142857143,
+    caseYear: 2024,
+    caseMonth: 5,
+    percent: 71.42857142857143,
   },
   {
-    case_year: 2024,
-    case_month: 6,
-    "Pct FCOS": 83.33333333333334,
+    caseYear: 2024,
+    caseMonth: 6,
+    percent: 83.33333333333334,
   },
   {
-    case_year: 2024,
-    case_month: 7,
-    "Pct FCOS": 75.28089887640449,
+    caseYear: 2024,
+    caseMonth: 7,
+    percent: 75.28089887640449,
   },
   {
-    case_year: 2024,
-    case_month: 8,
-    "Pct FCOS": 78.125,
+    caseYear: 2024,
+    caseMonth: 8,
+    percent: 78.125,
   },
   {
-    case_year: 2024,
-    case_month: 9,
-    "Pct FCOS": 76.85185185185185,
+    caseYear: 2024,
+    caseMonth: 9,
+    percent: 76.85185185185185,
   },
   {
-    case_year: 2024,
-    case_month: 10,
-    "Pct FCOS": 80.64516129032258,
+    caseYear: 2024,
+    caseMonth: 10,
+    percent: 80.64516129032258,
   },
   {
-    case_year: 2024,
-    case_month: 11,
-    "Pct FCOS": 67.08074534161491,
+    caseYear: 2024,
+    caseMonth: 11,
+    percent: 67.08074534161491,
   },
   {
-    case_year: 2024,
-    case_month: 12,
-    "Pct FCOS": 66.66666666666666,
+    caseYear: 2024,
+    caseMonth: 12,
+    percent: 66.66666666666666,
   },
 ]
 
-const chartConfig: ChartConfig = {
-  x_axis: {
-    label: "Month of Room In",
-    dataKey: "case_month",
-    formatter: (value: string) => value, //format with date-fns,
-  },
-  y_axis: {
-    label: "% of First Case On-Time Starts",
-    dataKey: "Pct FCOS",
-    formatter: (value: string) => `% of First Case On-Time Starts: ${value}%`,
-    tickFormatter: (value: string) => `${value}%`,
-    color: "#0096DD",
-  },
-}
+export function PercentFCOS() {
+  const maxY = getMaxCeiledValue(data, "percent")
+  const minY = getMinFlooredValue(data, "percent")
 
-export default function PercentFCOS() {
+  const label = (value: unknown) => {
+    return `% of First Case On-Time Starts: ${Number(value).toFixed(2)}%`
+  }
+
   return (
     <AreaGraph
+      className="w-[700px]"
       title="% of FCOS"
       subtitle="(< 0 Minutes Delay)"
-      data={chartData}
-      chartConfig={chartConfig}
+      data={data}
+      configuration={{
+        label: label,
+        x: {
+          key: "caseMonth",
+          color: "#0096DD",
+          formatter: (value) => {
+            const date = new Date()
+
+            date.setMonth((value as number) - 1)
+
+            return format(date, "MMM")
+          },
+        },
+        y: {
+          key: "percent",
+          color: "#0096DD",
+          max: maxY,
+          min: minY,
+          formatter: (value) => `${value}%`,
+        },
+      }}
     />
   )
 }
