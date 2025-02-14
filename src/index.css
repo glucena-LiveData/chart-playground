@@ -128,11 +128,10 @@ button:focus-visible {
 }
 
 @layer base {
-
   * {
     @apply border-border;
   }
-    
+
   body {
     @apply bg-background text-foreground;
   }
@@ -162,7 +161,7 @@ h1.chart-title {
   display: flex;
   height: fit-contents;
   flex-direction: row;
-  justify-content: space-between; 
+  justify-content: space-between;
   gap: 5px; /* Optional: Adds space between the visualization components */
   margin-bottom: 20px;
   vertical-align: top;

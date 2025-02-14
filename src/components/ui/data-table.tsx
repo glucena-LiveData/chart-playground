@@ -1,23 +1,20 @@
 import * as React from "react"
-import { Bar, BarChart, XAxis, YAxis, Tooltip } from "recharts"
-import { ChartConfig, ChartContainer } from "@/components/ui/chart"
+import {
+  ColumnDef,
+  flexRender,
+  getCoreRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+} from "@tanstack/react-table"
+
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import {
-  ColumnDef,
-  SortingState,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
- 
 import {
   Table,
   TableBody,
@@ -26,12 +23,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
- 
+
 interface DataTableProps<TData, TValue> {
-  title: string;
-  subtitle: string;
-  columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  title: string
+  subtitle: string
+  columns: ColumnDef<TData, TValue>[]
+  data: TData[]
 }
 
 export function DataTable<TData, TValue>({
@@ -41,7 +38,7 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = React.useState<SortingState>([])
- 
+
   const table = useReactTable({
     data,
     columns,
@@ -52,22 +49,25 @@ export function DataTable<TData, TValue>({
       sorting,
     },
   })
- 
+
   return (
     <Card className="visualization-container">
-			<CardHeader>
-				<CardTitle>{title}</CardTitle>
-				<CardDescription>{subtitle}</CardDescription>
-			</CardHeader>
-			<CardContent>
-        <div className="live-data-data-table w-full" >
+      <CardHeader>
+        <CardTitle>{title}</CardTitle>
+        <CardDescription>{subtitle}</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="live-data-data-table w-full">
           <Table className="w-full border-collapse border-none">
             <TableHeader className="background-none">
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow className="border-none" key={headerGroup.id}>
                   {headerGroup.headers.map((header) => {
                     return (
-                      <TableHead className="font-bold text-secondary-foreground" key={header.id}>
+                      <TableHead
+                        className="font-bold text-secondary-foreground"
+                        key={header.id}
+                      >
                         {header.isPlaceholder
                           ? null
                           : flexRender(
@@ -90,23 +90,9 @@ export function DataTable<TData, TValue>({
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
-                        {cell.column.columnDef.type === 'barChartColumn' ? (
-                          <div className="flex items-center">
-                            <div className="relative w-[150px] h-4">
-                              <div
-                                className="absolute top-0 left-0 h-full"
-                                style={{ 
-                                  width: `${cell.getValue()/(cell.column.columnDef.maxBar ? cell.column.columnDef.maxBar : 100) * 100}%`, 
-                                  backgroundColor: "#7B71FA",
-                                  borderTopRightRadius: '4px',
-                                  borderBottomRightRadius: '4px'
-                                }}
-                              ></div>
-                            </div>
-                            <div className="ml-2 text-right w-[50px]">{flexRender(cell.column.columnDef.cell, cell.getContext())}</div>
-                          </div>
-                        ) : (
-                          flexRender(cell.column.columnDef.cell, cell.getContext())
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
                         )}
                       </TableCell>
                     ))}
@@ -114,7 +100,10 @@ export function DataTable<TData, TValue>({
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
                     No results.
                   </TableCell>
                 </TableRow>
@@ -126,4 +115,3 @@ export function DataTable<TData, TValue>({
     </Card>
   )
 }
-
