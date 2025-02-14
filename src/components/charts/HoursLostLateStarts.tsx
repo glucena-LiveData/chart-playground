@@ -101,23 +101,6 @@ const data = [
   },
 ]
 
-const chartConfig: ChartConfig = {
-  x_axis: {
-    label: "Month of Room In",
-    dataKey: "caseMonth",
-    formatter: (value) => {
-      const date = new Date()
-
-      date.setMonth((value as number) - 1)
-
-      return format(date, "MMM")
-    },
-  },
-  y_axis: {
-    label: "Hours Lost to First Case Late Starts",
-  },
-}
-
 export function HoursLostLateStarts() {
   const maxY = getMaxCeiledValue(data, "hoursLost")
   const minY = getMinFlooredValue(data, "hoursLost")
