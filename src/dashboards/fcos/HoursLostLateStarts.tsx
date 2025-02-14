@@ -1,7 +1,7 @@
 "use client"
-import { LineChartConfig } from "@/types/chart-config"
+import { AreaChartConfig } from "@/types/chart-config"
 import { getShortMonth } from "@/lib/enumerations"
-import { AreaGraph } from "./components/ui/area-graph"
+import { AreaGraph } from "../../components/ui/area-graph"
 
 const chartData = [
 	{
@@ -102,7 +102,7 @@ const chartConfig = {
 		dataKey: "Total Hours Lost",
 		color: "#00AC72",
 	}
-} satisfies LineChartConfig;
+} satisfies AreaChartConfig;
 
 export default function HoursLostLateStarts() {
 	return (

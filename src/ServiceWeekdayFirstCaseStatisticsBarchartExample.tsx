@@ -1,22 +1,6 @@
 "use client"
 import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts"
 import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart"
-import { 
-	ColumnDef,
-} from "@tanstack/react-table"
-import { DataTable } from "@/components/ui/data-table"
-import { addSortButton } from "@/lib/functional-utils.tsx"
-
-interface FirstCaseSummary {
-	scheduled_service: string;
-	"FC Count": number;
-	"Pct FCOS": number;
-}
-
-interface CustomColumnDef<TData, TValue> extends ColumnDef<TData, TValue> {
-	type?: string;
-	maxBar?: number;
-}
 
 const chartConfig = {
 	percent_first_case_on_time: {
@@ -24,32 +8,6 @@ const chartConfig = {
 	  color: "#2471a3",
 	},
 } satisfies ChartConfig;
-
-const columns: CustomColumnDef<FirstCaseSummary, any>[] = [
-	{
-		accessorKey: "scheduled_service",
-		header: ({ column }) => {
-			return addSortButton(column, "Service");
-		},
-		cell: info => {return info.getValue()}
-	},
-	{
-		accessorKey: "FC Count",
-		header: ({ column }) => {
-			return addSortButton(column, "First Case Count");
-		},
-	},
-	{
-		accessorKey: "Pct FCOS",
-		header: "Actual Hours / Case",
-		type: "barChartColumn",
-		maxBar: 100,
-		cell: (info: { getValue: () => number | string }) => {
-			const value = info.getValue();
-			return typeof value === 'number' ? `${Math.round(value)}%` : value;
-		},
-	},
-];
 
 const visualizationData = [
 	{
@@ -118,12 +76,6 @@ const visualizationData = [
 		"Pct FCOS" : 55.55555555555556
 	}
 ]
-
-export function ServiceWeekdayFirstCaseStatsTable() {
-  return (
-		<DataTable title="Service Weekday First Case Statistics" columns={columns} data={visualizationData} />
-	)
-}
 
 export function ServiceWeekdayFirstCaseStatsChart() {
 	return (

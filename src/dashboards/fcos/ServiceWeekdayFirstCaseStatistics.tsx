@@ -100,7 +100,9 @@ const columns: CustomColumnDef<FirstCaseSummary, any>[] = [
 	},
 	{
 		accessorKey: "Pct FCOS",
-		header: "% First Caes On Time",
+		header: ({ column }) => {
+			return addSortButton(column, "% First Cases On Time");
+		},
 		type: "barChartColumn",
 		maxBar: 100,
 		cell: (info: { getValue: () => number | string }) => {

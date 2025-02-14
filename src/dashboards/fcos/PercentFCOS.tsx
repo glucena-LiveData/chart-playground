@@ -1,8 +1,8 @@
 "use client"
-import { LineChartConfig } from "@/types/chart-config"
+import { AreaChartConfig } from "@/types/chart-config"
 import { getShortMonth } from "@/lib/enumerations"
 import {numericFormat} from "@/lib/formatting-utils"
-import { AreaGraph } from "./components/ui/area-graph"
+import { AreaGraph } from "../../components/ui/area-graph"
 
 const chartData = [
 	{
@@ -80,7 +80,7 @@ const chartConfig = {
 		tickFormatter: (value: number) => `${numericFormat(value, 0)}%`,
 		color: "#0096DD",
 	}
-} satisfies LineChartConfig;
+} satisfies AreaChartConfig;
 
 export default function PercentFCOS() {
   return (
