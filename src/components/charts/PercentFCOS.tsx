@@ -72,16 +72,26 @@ const data: PercentFCOS[] = [
 ]
 
 export function PercentFCOS() {
+  const maxY = Math.ceil(Math.max(...data.map((d) => d.percent)) / 10) * 10
+  let minY = Math.floor(Math.min(...data.map((d) => d.percent)) / 10) * 10 - 10
+  minY = minY < 0 ? 0 : minY
+
+  const label = (value: unknown) => {
+    return `% of First Case On-Time Starts: ${Number(value).toFixed(2)}%`
+  }
+
   return (
     <AreaGraph
+      className="w-[700px]"
       title="% of FCOS"
       subtitle="(< 0 Minutes Delay)"
       data={data}
       configuration={{
+        label: label,
         x: {
-          label: "Month of Room In",
           dataKey: "caseMonth",
-          formatter: (value: unknown) => {
+          color: "#7B71FA",
+          formatter: (value) => {
             const date = new Date()
 
             date.setMonth((value as number) - 1)
@@ -90,12 +100,11 @@ export function PercentFCOS() {
           },
         },
         y: {
-          label: "% of First Case On-Time Starts",
           dataKey: "percent",
-          formatter: (value: unknown) => `${value}%`,
-          // formatter: (value: string) => `% of First Case On-Time Starts: ${value}%`,
-          // tickFormatter: (value: string) => `${value}%`,
-          // color: "#0096DD",
+          color: "#7B71FA",
+          max: maxY,
+          min: minY,
+          formatter: (value) => `${value}%`,
         },
       }}
     />

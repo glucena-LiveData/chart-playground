@@ -13,7 +13,7 @@ import "./index.css"
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <div>
-      <div className="flex flex-row gap-6 h-96">
+      <div className="flex flex-row gap-6">
         <PercentFCOS />
         {/* <LateStartCaseCounts />
       <HoursLostLateStarts /> */}
